@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday Emmi</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: linear-gradient(120deg, #ffd6d6, #ffe2f1);
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      position: relative;
+    }
+    .chat {
+      font-size: 1.3rem;
+      color: #333;
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      max-width: 600px;
+      text-align: left;
+      line-height: 1.8;
+      animation: fadeIn 1s ease-in-out;
+    }
+    .options {
+      margin-top: 15px;
+      display: none;
+      gap: 10px;
+    }
+    .options button {
+      padding: 8px 16px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background: #ff4d6d;
+      color: white;
+      transition: background 0.3s ease;
+    }
+    .options button:hover {
+      background: #e8435f;
+    }
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      text-align: center;
+      display: none;
+      animation: fadeIn 2s ease-in-out;
+    }
+    .card img {
+      width: 100%;
+      border-radius: 15px;
+      margin-bottom: 20px;
+    }
+    .card h1 {
+      font-size: 2.2rem;
+      color: #ff4d6d;
+      margin-bottom: 10px;
+    }
+    .card p {
+      font-size: 1.1rem;
+      color: #444;
+      line-height: 1.6;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .emoji {
+      position: absolute;
+      font-size: 24px;
+      animation: fall linear infinite;
+      top: -30px;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    iframe {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Background Music -->
+<iframe width="0" height="0" src="https://www.youtube.com/embed/7F2MHf8kx3Q?autoplay=1&loop=1&playlist=7F2MHf8kx3Q" 
+        frameborder="0" allow="autoplay" allowfullscreen></iframe>
+
+<!-- Chat Box -->
+<div class="chat" id="chatBox"></div>
+
+<!-- Options -->
+<div class="options" id="optionsBox">
+  <p style="font-size:1rem;margin-bottom:5px">Can I say something?</p>
+  <button onclick="handleResponse(true)">Yes</button>
+  <button onclick="handleResponse(false)">No</button>
+</div>
+
+<!-- Final Card -->
+<div class="card" id="wishCard">
+  <img src="C:\Users\muham\OneDrive\Documents\emmi.jpg" alt="Her Pic">
+  <h1>Happy Birthday, My Emmi ❤️</h1>
+  <p>
+    On this special day, I just want to say — you’re the most precious person in my life.<br>
+    May your day be filled with joy, warmth, and love. You deserve the entire universe. 🌹
+  </p>
+</div>
+
+<script>
+  const chatBox = document.getElementById('chatBox');
+  const optionsBox = document.getElementById('optionsBox');
+  const wishCard = document.getElementById('wishCard');
+
+  const messages = [
+    "Hey Emmi..."
+  ];
+
+  let i = 0;
+
+  function showMessage() {
+    if (i < messages.length) {
+      chatBox.innerHTML += messages[i] + "<br>";
+      if (i === 0) {
+        optionsBox.style.display = 'flex';
+      }
+    }
+  }
+
+  function handleResponse(answer) {
+    optionsBox.style.display = 'none';
+    if (answer) {
+      chatBox.innerHTML += "Okay, listen closely...<br>";
+      setTimeout(() => {
+        chatBox.innerHTML += "Today I didn’t want to just say 'Happy Birthday'...<br>";
+        setTimeout(() => {
+          chatBox.innerHTML += "You’re the reason behind my smile every day.<br>";
+          setTimeout(() => {
+            chatBox.innerHTML += "Now, scroll down slowly... 💖<br>";
+            setTimeout(() => {
+              chatBox.style.display = "none";
+              wishCard.style.display = "block";
+            }, 1500);
+          }, 1500);
+        }, 1500);
+      }, 1500);
+    } else {
+      chatBox.innerHTML += "Okay, I’ll wait till you're ready. 😅<br>";
+      setTimeout(() => {
+        optionsBox.style.display = 'flex';
+      }, 1500);
+    }
+  }
+
+  showMessage();
+
+  // Falling Emojis
+  const emojis = ["🎂", "❤️", "🌸"];
+  function createEmoji() {
+    const emoji = document.createElement("div");
+    emoji.classList.add("emoji");
+    emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+    emoji.style.left = Math.random() * 100 + "vw";
+    emoji.style.animationDuration = (Math.random() * 2 + 3) + "s";
+    emoji.style.fontSize = (Math.random() * 10 + 20) + "px";
+    document.body.appendChild(emoji);
+    setTimeout(() => emoji.remove(), 5000);
+  }
+  setInterval(createEmoji, 300);
+</script>
+</body>
+</html>

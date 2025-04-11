@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday Emmi</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: linear-gradient(120deg, #ffd6d6, #ffe2f1);
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .chat {
+      font-size: 1.3rem;
+      color: #333;
+      background: rgb(255, 255, 255);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      max-width: 600px;
+      text-align: left;
+      line-height: 1.8;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .options {
+      margin-top: 15px;
+      display: none;
+      gap: 10px;
+    }
+
+    .options button {
+      padding: 8px 16px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background: #ff4d6d;
+      color: white;
+      transition: background 0.3s ease;
+    }
+
+    .options button:hover {
+      background: #e8435f;
+    }
+
+    .card {
+      background: rgb(18, 18, 18);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px #0e0d0d;
+      max-width: 500px;
+      text-align: center;
+      display: none;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 15px;
+      margin-bottom: 20px;
+    }
+
+    .card h1 {
+      font-size: 2.2rem;
+      color: #ff4d6d;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 1.1rem;
+      color: #fffefe;
+      line-height: 1.6;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .emoji {
+      position: absolute;
+      font-size: 24px;
+      animation: fall linear infinite;
+      top: -30px;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Audio -->
+<audio id="bgMusic" autoplay loop>
+  <source src="arab.mp3" type="audio/mp3">
+</audio>
+
+<!-- Chat -->
+<div class="chat" id="chatBox"></div>
+
+<!-- Options -->
+<div class="options" id="optionsBox">
+  <p style="font-size:1rem;margin-bottom:5px">Can I say something?</p>
+  <button onclick="handleResponse(true)">Yes</button>
+  <button onclick="handleResponse(false)">No</button>
+</div>
+
+<!-- Final Card -->
+<div class="card" id="wishCard">
+  <img src="emmi.jpg" alt="Her Pic">
+  <h1>Happy Birthday, My Emmi ❤️</h1>
+  <p>"Happy Birthday Emmi! Dua karta hoon ke Allah tumhein lambi umar de, sehatmand rakhe aur har qadam par kamyabi dein. Tumhari zindagi hamesha khushiyon se bhari rahe, aur jo bhi goals hain tumhare, sab poore hon. Aaj ka din tumhare liye bohat special ho — enjoy karo, smile karo, aur apna day full on celebrate karo!"
+     </p>
+
+<br>
+<button style="margin-top: 15px; padding: 10px 20px; font-size: 1rem; background: #ff4d6d; color: white; border: none; border-radius: 10px; cursor: pointer;" onclick="window.location.href='upload.html'">Click Here 💌</button>
+
+</div>
+
+
+</div>
+
+
+<!-- Script -->
+<script>
+  const chatBox = document.getElementById('chatBox');
+  const optionsBox = document.getElementById('optionsBox');
+  const wishCard = document.getElementById('wishCard');
+
+  const messages = ["Hey Emmi..."];
+
+  let i = 0;
+
+  function showMessage() {
+    if (i < messages.length) {
+      chatBox.innerHTML += messages[i] + "<br>";
+      if (i === 0) {
+        optionsBox.style.display = 'flex';
+      }
+      i++;
+    }
+  }
+
+  function handleResponse(answer) {
+    optionsBox.style.display = 'none';
+    if (answer) {
+      chatBox.innerHTML += "Okay, listen closely...<br>";
+      setTimeout(() => {
+        chatBox.innerHTML += "Today I didn’t want to just say 'Happy Birthday'...<br>";
+        setTimeout(() => {
+          chatBox.innerHTML += "You’re the reason behind my smile every day.<br>";
+          setTimeout(() => {
+            chatBox.innerHTML += "Now, scroll down slowly... 💖<br>";
+            setTimeout(() => {
+              chatBox.style.display = "none";
+              wishCard.style.display = "block";
+            }, 1500);
+          }, 1500);
+        }, 1500);
+      }, 1500);
+    } else {
+      chatBox.innerHTML += "Okay, I’ll wait till you're ready. 😅<br>";
+      setTimeout(() => {
+        optionsBox.style.display = 'flex';
+      }, 1500);
+    }
+  }
+
+  showMessage();
+
+  // Falling Emojis (cakes 🎂, hearts ❤️, flowers 🌸)
+  const emojis = ["🎂", "❤️", "🌸"];
+  function createEmoji() {
+    const emoji = document.createElement("div");
+    emoji.classList.add("emoji");
+    emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+    emoji.style.left = Math.random() * 100 + "vw";
+    emoji.style.animationDuration = (Math.random() * 2 + 3) + "s";
+    emoji.style.fontSize = (Math.random() * 10 + 20) + "px";
+    document.body.appendChild(emoji);
+    setTimeout(() => emoji.remove(), 5000);
+  }
+  setInterval(createEmoji, 300);
+</script>
+</body>
+</html>
